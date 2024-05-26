@@ -1,95 +1,65 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client"
+import { useEffect, useState } from 'react';
+import IntroCard from './components/intro-card';
+import EndCard from './components/end-card';
+import QuestionCard from './components/question-card';
+import { title, questions } from './components/constants';
 
-export default function Home() {
+import './page.module.css';
+
+function Quiz() {
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [quizStarted, setQuizStarted] = useState(false);
+  const [quizCompleted, setQuizCompleted] = useState(false);
+  const [score, setScore] = useState(0);
+  const [showScore, setShowScore] = useState(false);
+  const [timer, setTimer] = useState(30);
+
+  useEffect(() => {
+    if (timer > 0 && !showScore) {
+      const interval = setInterval(() => {
+        setTimer(timer - 1);
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+    if (timer === 0) {
+      handleAnswerOptionClick(null);
+    }
+  }, [timer, showScore]);
+
+  const handleAnswerOptionClick = (option) => {
+    if (option === questions[currentQuestion].answer) {
+      setScore(score + 100);
+    }
+
+    const nextQuestion = currentQuestion + 1;
+    if (nextQuestion < questions.length) {
+      setCurrentQuestion(nextQuestion);
+      setTimer(30); // Reset timer for next question
+    } else {
+      setShowScore(true);
+    }
+  };
+
+  const showStartCard = () =>{
+
+  }
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+    <div className="quiz-container">
+       {quizStarted && (
+        <IntroCard questions={questions} />
+      )}
+      {!quizCompleted &&(
+        <QuestionCard 
+          title={title}
+          questions={questions}
         />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+      )}
+      {quizCompleted && (
+        <EndCard />
+      )}
+    </div>
   );
 }
+export default Quiz;
