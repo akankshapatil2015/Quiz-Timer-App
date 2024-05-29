@@ -25,7 +25,7 @@ const QuestionCard = ({
   const [selectedOption, setSelectedOption] = useState(null);
 
   useEffect(() => {
-    if (timer > 0 && !showScore && showTimer && setQuizStarted && !showAnswer) {
+    if (timer > 0 && !showScore && showTimer && !showAnswer) {
       const interval = setInterval(() => {
         setTimer((prevTimer) => {
           const newTimer = prevTimer - 1;
@@ -33,7 +33,7 @@ const QuestionCard = ({
           return newTimer;
         });
       }, 1000);
-      return () => clearInterval(interval);
+      return () => clearInterval(interval); //clearInterval() method clears a timer set with the setInterval() method.
     }
     if (timer === 0 && !isTimeUp) {
       setIsTimeUp(true);
@@ -42,7 +42,7 @@ const QuestionCard = ({
       showAnswerPanel();
       showCorrectAndWrongAns();
     }
-  }, [timer, showScore, showTimer, setQuizStarted, showAnswer]);
+  }, [timer, showScore, showTimer, showAnswer]);
 
   const showCorrectAndWrongAns = (option) => {
     const answer = questions[currentQuestion].answer;

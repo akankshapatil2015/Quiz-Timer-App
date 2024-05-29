@@ -25,7 +25,7 @@ const EndCard = ({
   return (
     <div className={styles.endCard}>
       <div className={styles.tabSection}>
-        <button>{score}</button>
+        <button>Score</button>
         <button>Answer</button>
         <button>LeaderBoard</button>
       </div>
