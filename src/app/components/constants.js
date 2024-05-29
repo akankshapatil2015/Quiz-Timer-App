@@ -30,4 +30,16 @@ export const questions = [
     answer: 'sly',
     subText: "Furtive can describe something done in a secretive way or the appearance of stealth. Someone might have a furtive look while being sneaky.",
   },
+  { 
+    question: "6. Oscar’s directions to the vacation house were circuitous.", 
+    options: ["illustrated", "delivered digitally", "difficult to follow", "simple"],
+    answer: 'difficult to follow',
+    subText: "In addition to winding or circular paths, circuitous can refer to being indirect in language or action.",
+  },
+  { 
+    question: "7. Bill noticed his younger brother had a furtive look on his face.", 
+    options: ["thoughful", "confused", "sly", "silly"], 
+    answer: 'sly',
+    subText: "Furtive can describe something done in a secretive way or the appearance of stealth. Someone might have a furtive look while being sneaky.",
+  },
 ];

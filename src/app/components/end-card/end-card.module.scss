@@ -1,0 +1,117 @@
+.endCard{
+    height: 100vh;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  
+    .tabSection{
+      width: 900px;
+      display: flex;
+      background-color: #fff;
+  
+      button{
+        max-width: 900px;
+        width: 299px;
+        padding: 1rem;
+        text-align: center;
+        font-size: 24px;
+        line-height: 24px;
+        cursor: pointer;
+        font-weight: 500;
+        color: hsl(209.7810218978deg 77.4011299435% 34.7058823529%);
+        border-bottom: 0.1875rem solid hsl(211.7647058824deg 100% 90%);
+        pointer-events: none;
+        border: 2px solid hsl(211.7647058824deg 100% 90%);
+        border-top-right-radius: 0.45rem;
+  
+        &:nth-child(1){
+          color: black;
+          font-weight: 700;
+          border-bottom: 0.2875rem solid black;
+        }
+      }
+    }
+    .endCardSection{
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      background-color: #fff;
+      box-shadow: 0 0 0.625rem hsla( 0deg 0% 0% /0.08);
+      border-radius: 0.5rem;
+      border-color: hsl(211.7647058824deg 100% 90%);
+      margin: 2rem;
+      padding: 2rem;
+      width: 800px;
+      height: 500px;
+  
+      .title{
+        font-size: 1.125rem;
+        font-weight: 700;
+        font-family: sans-serif;
+        margin-bottom: 20px;
+      }
+      .scoreWrapper{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        width: 332px;
+        height: 324px;
+  
+        .scoreWheel{
+          padding: 1rem;
+          text-align: center;
+  
+          .congratsText{
+            padding: 8px 12px;
+            font-weight: 500;
+            background-color: hsl(210, 77%, 35%);
+            border-radius: 0.5rem;
+            color: hsl(0deg 0% 100%);
+            position: absolute;
+            left: 50%;
+            top: 0rem;
+            transform: translateX(-50%);
+          }
+          
+          .CircularProgressbar{
+            width: 200px;
+          }
+          
+          .score{
+            display: flex;
+            flex-direction: column;
+  
+            .score1{
+              color: hsl(209.7810218978deg 77.4011299435% 34.7058823529%);
+              font-size: 3rem;
+              font-weight: 900;
+            }
+  
+            .score2{
+              font-size: 0.875rem;
+            }
+          }
+        }
+        .playAgainBtn{
+          cursor: pointer;
+          box-shadow: 0 0 0.625rem hsla( 0deg 0% 0% /0.08);
+          background-color: hsl(0deg 0% 100%);
+          color: hsl(209.7810218978deg 77.4011299435% 34.7058823529%);
+          border: 0.2rem solid hsla(209.7810218978deg, 77.4011299435%, calc(34.7058823529% + 55%));
+          border-radius: 0.5rem;
+          display: inline-flex;
+          font-weight: 500;
+          padding: 0.75em 1em;
+          width: 134px;
+        }
+      }
+    }
+  }
+  

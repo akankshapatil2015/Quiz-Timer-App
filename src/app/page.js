@@ -1,65 +1,52 @@
 "use client"
-import { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import IntroCard from './components/intro-card';
-import EndCard from './components/end-card';
 import QuestionCard from './components/question-card';
+import EndCard from './components/end-card';
 import { title, questions } from './components/constants';
 
-import './page.module.css';
-
-function Quiz() {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
+const QuizTimerApp = () => {
   const [quizStarted, setQuizStarted] = useState(false);
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [score, setScore] = useState(0);
-  const [showScore, setShowScore] = useState(false);
-  const [timer, setTimer] = useState(30);
-
-  useEffect(() => {
-    if (timer > 0 && !showScore) {
-      const interval = setInterval(() => {
-        setTimer(timer - 1);
-      }, 1000);
-      return () => clearInterval(interval);
-    }
-    if (timer === 0) {
-      handleAnswerOptionClick(null);
-    }
-  }, [timer, showScore]);
-
-  const handleAnswerOptionClick = (option) => {
-    if (option === questions[currentQuestion].answer) {
-      setScore(score + 100);
-    }
-
-    const nextQuestion = currentQuestion + 1;
-    if (nextQuestion < questions.length) {
-      setCurrentQuestion(nextQuestion);
-      setTimer(30); // Reset timer for next question
-    } else {
-      setShowScore(true);
-    }
-  };
-
-  const showStartCard = () =>{
-
-  }
+  const [showTimer, setShowTimer] = useState(true);
 
   return (
     <div className="quiz-container">
-       {quizStarted && (
-        <IntroCard questions={questions} />
-      )}
-      {!quizCompleted &&(
-        <QuestionCard 
+       {!quizStarted && (
+        <IntroCard
           title={title}
           questions={questions}
+          setQuizStarted={setQuizStarted}
+          setQuizCompleted={setQuizCompleted}
+          setScore={setScore}
+          setShowTimer={setShowTimer}
+        />
+      )}
+      {quizStarted && !quizCompleted &&(
+        <QuestionCard
+          title={title}
+          questions={questions}
+          setQuizStarted={setQuizStarted}
+          setQuizCompleted={setQuizCompleted}
+          score={score}
+          setScore={setScore}
+          showTimer={showTimer}
+          setShowTimer={setShowTimer}
         />
       )}
       {quizCompleted && (
-        <EndCard />
+        <EndCard
+          questions={questions}
+          score={score}
+          setScore={setScore}
+          title={title}
+          setQuizStarted={setQuizStarted}
+          setQuizCompleted={setQuizCompleted}
+        />
       )}
     </div>
   );
-}
-export default Quiz;
+};
+
+export default QuizTimerApp;
